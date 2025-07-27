@@ -2,8 +2,8 @@ from telegram import Update
 from telegram.ext import Application, CommandHandler, MessageHandler, filters, ContextTypes
 import os
 
-# Get token from environment
-TOKEN = os.getenv("8401054809:AAHpNtIGTmUcwO5xB3WhXPtAX7r5A9fIPgU")
+# ✅ Correct: Get token from environment variable named "BOT_TOKEN"
+TOKEN = os.getenv("BOT_TOKEN")
 
 if not TOKEN:
     raise ValueError("❌ BOT_TOKEN not set. Add it as environment variable.")
@@ -36,4 +36,5 @@ app.add_handler(CommandHandler("start", start))
 app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
 
 print("🤖 Bot running...")
+
 app.run_polling()
