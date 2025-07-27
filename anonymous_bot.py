@@ -6,7 +6,6 @@ from telegram.ext import (
     Application, CommandHandler, MessageHandler, filters, ContextTypes
 )
 
-# Queues and active chat pairs
 waiting_users = []
 active_chats = {}
 
@@ -68,7 +67,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         parse_mode="Markdown"
     )
 
-# Relay messages between users
+# Message relay
 async def relay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_id = update.message.chat_id
     partner_id = active_chats.get(user_id)
@@ -88,9 +87,11 @@ async def relay(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif msg.voice:
         await context.bot.send_voice(chat_id=partner_id, voice=msg.voice.file_id)
 
-# Main runner
+# Bot runner
 def main():
-    app = Application.builder().token("8401054809:AAHpNtIGTmUcwO5xB3WhXPtAX7r5A9fIPgU").build()
+    import os
+    TOKEN = os.getenv("BOT_TOKEN")  # use env variable on Render
+    app = Application.builder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("stop", stop))
@@ -98,7 +99,7 @@ def main():
     app.add_handler(CommandHandler("help", help_command))
     app.add_handler(MessageHandler(filters.ALL & ~filters.COMMAND, relay))
 
-    print("Bot is running...")
+    print("✅ Bot is running...")
     app.run_polling()
 
 if __name__ == "__main__":
