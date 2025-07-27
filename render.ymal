@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: anonymous-telegram-bot
+    runtime: python
+    buildCommand: ""
+    startCommand: python anonymous_bot.py
+    envVars:
+      - key: 8401054809:AAHpNtIGTmUcwO5xB3WhXPtAX7r5A9fIPgU
+        sync: false
