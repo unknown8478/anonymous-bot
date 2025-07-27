@@ -90,7 +90,7 @@ async def relay(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Bot runner
 def main():
     import os
-    TOKEN = os.getenv("BOT_TOKEN")  # use env variable on Render
+    TOKEN = os.getenv("8401054809:AAHpNtIGTmUcwO5xB3WhXPtAX7r5A9fIPgU")  # use env variable on Render
     app = Application.builder().token(TOKEN).build()
 
     app.add_handler(CommandHandler("start", start))
